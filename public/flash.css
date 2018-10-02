@@ -1,0 +1,71 @@
+/* general */
+body {
+  background-color: #222;
+}
+.hidden {
+  display: none !important;
+}
+.center {
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+/* End */
+
+#cardContainer {
+  width: 800px;
+  height: 500px;
+  background: #ddd;
+  margin: auto;
+  display: flex;
+  position: relative;
+}
+
+#content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+}
+
+#content .card-content {
+  width: 100%;
+}
+
+/* bottom */
+#controls {
+  position: absolute;
+  bottom: 0;
+  height: 80px;
+  text-align: center;
+  border: 1px solid #aaa;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#feedBack {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.control {
+  width: 100%;
+  text-align:center;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.control.red {
+  background-color: red;
+}
+.control.okay {
+  background-color: yellow;
+}
+.control.good {
+  background-color: green;
+}
+/* End */

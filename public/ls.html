@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+.lsNameInput {
+  width: 100%;
+}
+.lsInput {
+  width: 100%;
+}
+body {
+  background-color: #222;
+  display: flex;
+}
+.container {
+  width: 100%;
+  margin: 50px;
+}
+h2 {
+  color: #eee;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Local Storage Item Name:</h2>
+    <input class="lsNameInput" type="text">
+    <button class="lsGetItem">Get Item</button>
+    <h2>Local Storage Item Value:</h2>
+    <textarea class="lsInput" name="" cols="30" rows="10"></textarea>
+  </div>
+  <script>
+const lsGetItem = document.querySelector('.lsGetItem');
+const lsNameInput = document.querySelector('.lsNameInput');
+const lsInput = document.querySelector('.lsInput');
+lsGetItem.onclick = () => {
+  const val = lsNameInput.value;
+  if (!val || val.length < 5) return;
+  lsInput.value = localStorage.getItem(val);
+};
+  </script>
+</body>
+</html>

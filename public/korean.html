@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+.wordContainer {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 10px;
+}
+.wordContainer textarea{
+  width: 50%;
+}
+.entryContainer {
+  width: 200px;
+  margin: 10px;
+  display: inline-block;
+}
+  </style>
+</head>
+<body>
+  <h3>New Word</h3>
+  <select id="wordType">
+    <option value="adjective">adjective</option>
+    <option value="adverb">adverb</option>
+    <option value="noun">noun</option>
+    <option value="verb" selected>verb</option>
+  </select>
+  <div class="entryContainer">
+    <span class="bold">Root</span>: <input type="text" id="rootInput"></input>
+  </div>
+  <div class="entryContainer verbSpecific">
+    <span class="bold">Past</span>: <input type="text" id="pastInput"></input>
+  </div>
+  <div class="entryContainer verbSpecific">
+    <span class="bold">Present Continuous</span>: <input type="text" id="pcInput"></input>
+  </div>
+  <br>
+  <div class="entryContainer">
+    <span class="bold">Definition:</span>
+    <textarea id="defInput"></textarea>
+  </div>
+  <div class="entryContainer">
+    <span class="bold">Korean Root:</span>
+    <input type="text" id="kInput"></input>
+  </div>
+  <button id="newWordEng">Submit</button>
+  <hr>
+  <div id="root"></div>
+  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+  <script>
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBYRX_Je8Cp-OolJW0yF3xHLMDXOiIgIZI",
+  authDomain: "learnkorean-7e64f.firebaseapp.com",
+  databaseURL: "https://learnkorean-7e64f.firebaseio.com",
+  projectId: "learnkorean-7e64f",
+  storageBucket: "learnkorean-7e64f.appspot.com",
+  messagingSenderId: "101467727592"
+};
+firebase.initializeApp(config);
+
+//const lessonData = JSON.parse(localStorage.getItem('koreanLessons'));
+firebase.database().ref('/lessons').once('value').then(snap => {
+  const lessons = snap.val();
+  firebase.database().ref('/global').once('value').then(snap => {
+    const words = snap.val();
+    localStorage.setItem('llip-app', JSON.stringify({lessons, words}));
+  });
+});
+  </script>
+  <script src="./helpers.js"></script>
+  <script src="./korean.js"></script>
+</body>
+</html>
