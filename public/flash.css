@@ -14,8 +14,8 @@ body {
 /* End */
 
 #cardContainer {
-  width: 800px;
-  height: 500px;
+  max-width: 800px;
+  min-height: 500px;
   background: #ddd;
   margin: auto;
   display: flex;
@@ -23,11 +23,7 @@ body {
 }
 
 #content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 80px;
+  width: 100%;
 }
 
 #content .card-content {

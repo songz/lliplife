@@ -36,11 +36,6 @@ eFeedbackButtons.forEach(element => {
   };
 });
 
-let isFlipped = false;
-
-const setFlipped = (val=false) => {
-};
-
 let flipped = false;
 eContent.onclick = () => {
   if (flipped) return;
@@ -73,7 +68,8 @@ let currentWordId = '';
 
 const showContent = () => {
   const word = flipped ? currentContent[1] : currentContent[0];
-  eFront.innerText = word.root;
+  console.log(word);
+  eFront.innerText = (word.display || word.root);
   eExtra.innerText = word.definition || '';
 };
 
@@ -82,6 +78,10 @@ const startCard = () => {
   currentWordId = cards.shift();
   const word = langWords[currentWordId];
   const engWord = engWords[word.link];
+  if (engWord.type === 'verb')
+    engWord.display = `to ${engWord.root}`;
+  if (engWord.type === 'adjective')
+    engWord.display = `to be ${engWord.root}`;
   currentContent = [engWord, word];
   eControls.classList.add('hidden');
   showContent();
