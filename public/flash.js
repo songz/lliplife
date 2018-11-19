@@ -2,7 +2,10 @@ const eFront = document.querySelector('#content h1');
 const eExtra = document.querySelector('#content .extra');
 const eContent = document.querySelector('#content');
 const eControls = document.querySelector('#controls');
+const eProgress = document.querySelector('.progress');
 const eFeedbackButtons = Array.from(document.querySelectorAll('#controls .control'));
+
+const progression = new Set();
 
 eFeedbackButtons.forEach(element => {
   element.onclick = (e) => {
@@ -14,6 +17,8 @@ eFeedbackButtons.forEach(element => {
       rootData.cardStats = cardStats;
     }
     if (val === "good") {
+      progression.add(currentWordId);
+      eProgress.innerText = progression.size;
       let stat = +cardStats[currentWordId];
       if (stat) {
         stat *= 2;

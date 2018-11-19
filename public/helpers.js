@@ -7,12 +7,12 @@ const helpers = {};
 
   helpers.renderEntry = (word) => {
     return `
-    <div class="entryContainer">
-      <span class="bold">Root</span>: <input type="text" value="${word.root}" class="rootInput"></input>
-    </div>
-    <div class="entryContainer">
+    <div class="entryContainer2">
       <span class="bold">Korean</span>: <input type="text" class="koreanInput"></input>
       <button class="koreanRootSave">Save</button>
+    </div>
+    <div class="entryContainer">
+      <span class="bold">Root</span>: <input type="text" value="${word.root}" class="rootInput"></input>
     </div>
     <div class="entryContainer">
       <span class="bold">Past</span>: <input type="text" value="${word.past || ''}" class="pastInput"></input>
@@ -50,6 +50,8 @@ const helpers = {};
         if (map[word.link]) word.link = map[word.link];
         if(key.includes('tmp')) {
           tmpExist = true;
+          console.log('syncing key', word);
+          return;
           const link = fbdb.ref(`/global/${lang}`).push(word).key;
           words[link] = word;
           delete words[key];

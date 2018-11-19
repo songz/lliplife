@@ -6,7 +6,8 @@
   <style>
 .wordContainer {
   border-bottom: 1px solid #aaa;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 .wordContainer textarea{
   width: 50%;
@@ -60,7 +61,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
-//const lessonData = JSON.parse(localStorage.getItem('koreanLessons'));
+const lessonData = JSON.parse(localStorage.getItem('koreanLessons'));
 firebase.database().ref('/lessons').once('value').then(snap => {
   const lessons = snap.val();
   firebase.database().ref('/global').once('value').then(snap => {
