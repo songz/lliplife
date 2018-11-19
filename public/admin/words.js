@@ -36,9 +36,15 @@ function Word(word, id) {
     return localStorage.setItem('korean', JSON.stringify(rootData));
   };
 
-  this.setDisplay = (nval) => {
+  this.filterWord = (nval) => {
     const dstyle = (word.root.includes(nval) || word.definition.includes(nval)) ? 'block' : 'none';
     container.style.display = dstyle;
+  };
+  this.show = () => {
+    container.style.display = 'block';
+  };
+  this.hide = () => {
+    container.style.display = 'none';
   };
   this.setupKorean = (kWord, kKey) => {
     this.koreanKey = kKey;
@@ -46,55 +52,3 @@ function Word(word, id) {
   };
 };
 
-const rootData = JSON.parse(localStorage.getItem('llip-app')).words;
-if (rootData) {
-  helpers.syncTmpWords(rootData);
-
-  const engWords = {};
-  Object.entries(rootData.english).forEach( ([key, word] ) => {
-    word.definition = word.definition || '';
-    if(!word.root) console.log('wtf', word);
-    //if(word.type === 'verb') {
-    engWords[key] = new Word(word, key);
-    //}
-  });
-
-  Object.entries(rootData.korean).forEach( ([key, word] ) => {
-    const wElement = engWords[word.link];
-    if(!wElement) return;
-    wElement.setupKorean(word, key);
-  });
-
-  const types = ['adjective', 'adverb', 'noun', 'verb'];
-  console.log(rootData);
-
-  wordType.onchange = () => {
-    const displayStyle = (wordType.value === 'verb') ? 'inline-block' : 'none';
-    Array.from(document.querySelectorAll('.verbSpecific')).forEach(e => {
-      e.style.display = displayStyle;
-    });
-  }
-
-  // Creating new words
-  newWordEng.onclick = () => {
-    // Adding new word
-    const type = wordType.value;
-    const data = {type, root: rootInput.value, definition: defInput.value};
-    if (type === 'verb') {
-      data.presentContinuous = pcInput.value;
-      data.past = pastInput.value;
-    }
-    console.log(data);
-    const link = firebase.database().ref('/global/english').push(data).key;
-    //const link = `tmp22${Date.now()}`;
-    rootData.english[link] = data;
-    helpers.addNewKoreanWord(kInput.value, link, type);
-  };
-
-  rootInput.onkeyup = () => {
-    const inVal = rootInput.value;
-    Object.values(engWords).forEach( w => {
-      w.setDisplay(inVal);
-    });
-  };
-}

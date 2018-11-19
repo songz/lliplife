@@ -47,6 +47,15 @@
   </div>
   <button id="newWordEng">Submit</button>
   <hr>
+  <h3>Filters:</h3>
+  <select id="filterWordType">
+    <option value="all" selected>all</option>
+    <option value="adjective">adjective</option>
+    <option value="adverb">adverb</option>
+    <option value="noun">noun</option>
+    <option value="verb">verb</option>
+  </select>
+  <hr>
   <div id="root"></div>
   <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
   <script>
@@ -71,6 +80,9 @@ firebase.database().ref('/lessons').once('value').then(snap => {
 });
   </script>
   <script src="./helpers.js"></script>
-  <script src="./korean.js"></script>
+  <script src="./admin/words.js"></script>
+  <script src="./admin/newWord.js"></script>
+  <script src="./admin/filter.js"></script>
+  <script src="./admin/korean.js"></script>
 </body>
 </html>
