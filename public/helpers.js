@@ -6,10 +6,22 @@ const helpers = {};
   };
 
   helpers.renderEntry = (word) => {
+    const defaultSelect = (sysType, wordType) => {
+      return sysType === wordType ? 'selected="selected"' : '';
+    };
     return `
     <div class="entryContainer2">
       <span class="bold">Korean</span>: <input type="text" class="koreanInput"></input>
       <button class="koreanRootSave">Save</button>
+    </div>
+    <div class="entryContainer">
+      <span class="bold">Type</span>: 
+      <select class="wordType">
+        <option value="adjective" ${defaultSelect('adjective', word.type)}>adjective</option>
+        <option value="adverb" ${defaultSelect('adverb', word.type)}>adverb</option>
+        <option value="noun" ${defaultSelect('noun', word.type)}>noun</option>
+        <option value="verb" ${defaultSelect('verb', word.type)}>verb</option>
+      </select>
     </div>
     <div class="entryContainer">
       <span class="bold">Root</span>: <input type="text" value="${word.root}" class="rootInput"></input>
@@ -50,8 +62,6 @@ const helpers = {};
         if (map[word.link]) word.link = map[word.link];
         if(key.includes('tmp')) {
           tmpExist = true;
-          console.log('syncing key', word);
-          return;
           const link = fbdb.ref(`/global/${lang}`).push(word).key;
           words[link] = word;
           delete words[key];
@@ -80,15 +90,4 @@ const helpers = {};
   };
 })();
 
-/*
-const fbdb = {
-  ref: (url) => {
-    return {
-      push: (data) => {
-        return {key: `tmp${Date.now() + Math.random()}b`}
-      }
-    }
-  }
-}
-*/
 const fbdb = firebase.database();

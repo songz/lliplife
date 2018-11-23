@@ -1,7 +1,7 @@
 const setUpNewWordComponent = (engWords) => {
   // Setting up new word
-  wordType.onchange = () => {
-    const displayStyle = (wordType.value === 'verb') ? 'inline-block' : 'none';
+  newWordType.onchange = () => {
+    const displayStyle = (newWordType.value === 'verb') ? 'inline-block' : 'none';
     Array.from(document.querySelectorAll('.verbSpecific')).forEach(e => {
       e.style.display = displayStyle;
     });
@@ -10,7 +10,7 @@ const setUpNewWordComponent = (engWords) => {
   // Creating new words
   newWordEng.onclick = () => {
     // Adding new word
-    const type = wordType.value;
+    const type = newWordType.value;
     const data = {type, root: rootInput.value, definition: defInput.value};
     if (type === 'verb') {
       data.presentContinuous = pcInput.value;
