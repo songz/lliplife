@@ -1,3 +1,4 @@
+const appData = JSON.parse(localStorage.getItem('llip-app'));
 const rootData = JSON.parse(localStorage.getItem('llip-app')).words;
 if (rootData) {
   helpers.syncTmpWords(rootData);
@@ -16,3 +17,8 @@ if (rootData) {
   setUpFilter(engWords);
   setUpNewWordComponent(engWords);
 }
+
+const saveDB = () => {
+  appData.words = rootData;
+  return localStorage.setItem('llip-app', JSON.stringify(appData));
+};

@@ -14,14 +14,14 @@ function Word(word, id) {
         root: kValue
       });
       rootData.korean[this.koreanKey].root = kValue;
-      return localStorage.setItem('korean', JSON.stringify(rootData));
+      return saveDB();
     }
     helpers.addNewKoreanWord(kValue, id, helpers.getWordType());
   };
 
   container.querySelector('.saveButton').onclick = () => {
     // Update Word
-    const type = wordType.value;
+    const type = container.querySelector('.wordType').value;
     const data = {
       type,
       root: container.querySelector('.rootInput').value,
@@ -33,7 +33,7 @@ function Word(word, id) {
     }
     rootData.english[id] = {...rootData.english[id], ...data};
     firebase.database().ref(`/global/english/${id}`).update(data);
-    return localStorage.setItem('korean', JSON.stringify(rootData));
+    return saveDB();
   };
 
   this.filterWord = (nval) => {

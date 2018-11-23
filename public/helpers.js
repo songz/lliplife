@@ -86,7 +86,7 @@ const helpers = {};
     const klink = firebase.database().ref('/global/korean').push(kData).key;
     //const klink = `tmp23${Date.now()}`;
     rootData.korean[klink] = kData;
-    localStorage.setItem('korean', JSON.stringify(rootData));
+    saveDB();
   };
 })();
 
