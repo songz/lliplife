@@ -75,7 +75,10 @@ firebase.database().ref('/lessons').once('value').then(snap => {
   const lessons = snap.val();
   firebase.database().ref('/global').once('value').then(snap => {
     const words = snap.val();
-    localStorage.setItem('llip-app', JSON.stringify({lessons, words}));
+    const myData = JSON.parse(localStorage.getItem('llip-app') || "{}");
+    myData.lessons = lessons;
+    myData.words = words;
+    localStorage.setItem('llip-app', JSON.stringify(myData));
   });
 });
   </script>
