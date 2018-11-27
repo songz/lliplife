@@ -70,7 +70,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-const lessonData = JSON.parse(localStorage.getItem('koreanLessons'));
 firebase.database().ref('/lessons').once('value').then(snap => {
   const lessons = snap.val();
   firebase.database().ref('/global').once('value').then(snap => {

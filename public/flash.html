@@ -28,6 +28,34 @@
       </div>
     </div>
   </div>
+  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+  <script>
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBYRX_Je8Cp-OolJW0yF3xHLMDXOiIgIZI",
+  authDomain: "learnkorean-7e64f.firebaseapp.com",
+  databaseURL: "https://learnkorean-7e64f.firebaseio.com",
+  projectId: "learnkorean-7e64f",
+  storageBucket: "learnkorean-7e64f.appspot.com",
+  messagingSenderId: "101467727592"
+};
+firebase.initializeApp(config);
+
+const loadAppData = () => {
+  console.log('loading app data....');
+  firebase.database().ref('/lessons').once('value').then(snap => {
+    const lessons = snap.val();
+    firebase.database().ref('/global').once('value').then(snap => {
+      const words = snap.val();
+      const myData = JSON.parse(localStorage.getItem('llip-app') || "{}");
+      myData.lessons = lessons;
+      myData.words = words;
+      localStorage.setItem('llip-app', JSON.stringify(myData));
+      window.location.reload();
+    });
+  });
+};
+  </script>
   <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
   <script src="./flash.js"></script>
 </body>

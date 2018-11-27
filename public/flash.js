@@ -62,8 +62,13 @@ feedBack.onclick = (e) => {
 };
 
 const lang = 'korean';
+if (!localStorage.getItem('llip-app') || localStorage.getItem('llip-app').length < 100) {
+  loadAppData();
+}
 const rootData = JSON.parse(localStorage.getItem('llip-app'));
-console.log(localStorage.getItem('llip-app'));
+if (!rootData || !rootData.words || !rootData.words.english) {
+  loadAppData();
+}
 const words = rootData.words;
 const engWords = words.english;
 const langWords = words[lang];
