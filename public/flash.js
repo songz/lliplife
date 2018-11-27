@@ -43,7 +43,12 @@ eFeedbackButtons.forEach(element => {
 
 let flipped = false;
 eContent.onclick = () => {
-  if (flipped) return;
+  if (flipped) {
+    flipped = false;
+    eControls.classList.add('hidden');
+    showContent();
+    return;
+  };
   flipCard();
 };
 
@@ -87,6 +92,7 @@ const startCard = () => {
     engWord.display = `to ${engWord.root}`;
   if (engWord.type === 'adjective')
     engWord.display = `to be ${engWord.root}`;
+  engWord.isEnglish = true;
   currentContent = [engWord, word];
   eControls.classList.add('hidden');
   showContent();
@@ -94,3 +100,9 @@ const startCard = () => {
 
 startCard();
 console.log(cards);
+
+document.querySelector('#speaker').onclick = () => {
+  const word = flipped ? currentContent[1] : currentContent[0];
+  const voice = word.isEnglish ? "US English Female" : 'Korean Female';
+  responsiveVoice.speak(word.root, voice, {rate: 0.7});
+};
