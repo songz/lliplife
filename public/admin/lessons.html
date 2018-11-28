@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="./lessons.css">
+</head>
+<body>
+  
+  <div id="root"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+  <script>
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBYRX_Je8Cp-OolJW0yF3xHLMDXOiIgIZI",
+  authDomain: "learnkorean-7e64f.firebaseapp.com",
+  databaseURL: "https://learnkorean-7e64f.firebaseio.com",
+  projectId: "learnkorean-7e64f",
+  storageBucket: "learnkorean-7e64f.appspot.com",
+  messagingSenderId: "101467727592"
+};
+firebase.initializeApp(config);
+
+firebase.database().ref('/lessons').once('value').then(snap => {
+  const lessons = snap.val();
+  console.log('lessons', lessons);
+  firebase.database().ref('/global').once('value').then(snap => {
+    const words = snap.val();
+    const myData = JSON.parse(localStorage.getItem('llip-app') || "{}");
+    myData.lessons = lessons;
+    myData.words = words;
+    localStorage.setItem('llip-app', JSON.stringify(myData));
+    startApp();
+  });
+});
+  </script>
+  <script src="./lessons.js"></script>
+</body>
+</html>
