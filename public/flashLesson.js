@@ -88,7 +88,7 @@ Array.prototype.random = function() {
 
     if (!engStruct || !langStruct) {
       const wordId = cards.shift();
-      wordMap = { wordId }
+      wordMap = { blahblah: {wordId} }
       langDisplay = langWords[wordId].root;
       const engWord = engWords[langWords[wordId].link];
       if (engWord.type === 'verb') {
