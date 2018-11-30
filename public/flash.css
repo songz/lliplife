@@ -15,11 +15,12 @@ body {
 
 #cardContainer {
   max-width: 800px;
-  min-height: 500px;
+  min-height: 300px;
   background: #ddd;
   margin: auto;
   display: flex;
   position: relative;
+  flex-direction: column;
 }
 
 .progress {
@@ -32,16 +33,16 @@ body {
 
 #content {
   width: 100%;
+  flex: 1;
 }
 
 #content .card-content {
   width: 100%;
+  padding: 20px;
 }
 
 /* bottom */
 #controls {
-  position: absolute;
-  bottom: 0;
   height: 80px;
   text-align: center;
   border: 1px solid #aaa;
