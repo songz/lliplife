@@ -74,12 +74,14 @@ body {
   background-color: green;
 }
 
+/* TODO: remove when convenient */
 #speaker {
   position: fixed;
   bottom: 10px;
   right: 10px;
   z-index: 2;
 }
+
 #bottom {
   position: fixed;
   bottom: 10px;

@@ -21,6 +21,7 @@ function Lesson(lessonId, lesson) {
     selection.lessonId = lessonId;
     rootData.selection = selection;
     localStorage.setItem('llip-app', JSON.stringify(rootData));
+    window.location = "/flashLesson.html"
   };
 };
 

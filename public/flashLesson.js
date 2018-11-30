@@ -216,4 +216,8 @@ Array.prototype.random = function() {
     window.location.reload();
   };
 
+  document.querySelector('#button__lesson').onclick = () => {
+    window.location = "/lessonlist.html";
+  };
+
 })();
