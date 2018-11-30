@@ -93,12 +93,12 @@ Array.prototype.random = function() {
       const engWord = engWords[langWords[wordId].link];
       if (engWord.type === 'verb') {
         engDisplay = `to ${engWord.root}`;
-        engRoot = engWord.root;
-      }
-      if (engWord.type === 'adjective') {
+      } else if (engWord.type === 'adjective') {
         engDisplay = `to be ${engWord.root}`;
-        engRoot = engWord.root;
+      } else {
+        engDisplay = engWord.root;
       }
+      engRoot = engWord.root;
     } else {
       wordMap = engStruct.split('-').reduce((acc, e, i) => {
         const regex = /^(\d*)(.*)\((.*)\)/g;
@@ -137,6 +137,7 @@ Array.prototype.random = function() {
         }
       });
     }
+
 
     currentContent = [{
       display: engDisplay,

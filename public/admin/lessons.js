@@ -12,15 +12,15 @@ function Lesson(lessonId, lesson) {
   div.innerHTML = `
     <div style="display: flex;">
       <label for="${lessonId}title" style="width: 200px;">Title</label>
-      <input id="${lessonId}title" class="inputField" type="text" value=${lesson.title || ''}>
+      <textarea id="${lessonId}title" class="inputField" >${lesson.title || ''}</textarea>
     </div>
-    <div class="hidden">
+    <div class="">
       <label for="${lessonId}id" style="width: 200px;">Id</label>
       <input id="${lessonId}id" class="inputField" type="text" value=${lesson.id || lessonId}>
     </div>
     <div style="display: flex;">
       <label for="${lessonId}cardContent" style="width: 200px;">Card Content</label>
-      <input id="${lessonId}cardContent" class="inputField" type="text" value=${lesson.cardContent || ''}>
+      <textarea id="${lessonId}cardContent" class="inputField" >${lesson.cardContent || ''}</textarea>
     </div>
     <div style="display: flex;">
       <label for="${lessonId}content" style="width: 200px;">Content</label>
@@ -32,15 +32,15 @@ function Lesson(lessonId, lesson) {
     </div>
     <div style="display: flex;">
       <label for="${lessonId}description" style="width: 200px;">Description</label>
-      <input id="${lessonId}description" class="inputField" type="text" value=${lesson.description || ''}>
+      <textarea id="${lessonId}description" class="inputField" >${lesson.description || ''}</textarea>
     </div>
     <div style="display: flex;">
       <label for="${lessonId}englishStructure" style="width: 200px;">English Struct</label>
-      <input id="${lessonId}englishStructure" class="inputField" type="text" value=${lesson.englishStructure || ''}>
+      <textarea id="${lessonId}englishStructure" class="inputField" >${lesson.englishStructure || ''}</textarea>
     </div>
     <div style="display: flex;">
       <label for="${lessonId}languageStructure" style="width: 200px;">Language Struct</label>
-      <input id="${lessonId}languageStructure" class="inputField" type="text" value=${lesson.languageStructure || ''}>
+      <textarea id="${lessonId}languageStructure" class="inputField" >${lesson.languageStructure || ''}</textarea>
     </div>
     <div style="display: flex;">
       <label for="${lessonId}hint" style="width: 200px;">Hint</label>
@@ -55,10 +55,18 @@ function Lesson(lessonId, lesson) {
       <input id="${lessonId}video" class="inputField" type="text" value=${lesson.video || ''}>
     </div>
   `;
-  div.innerHTML += `<button>submit</button><hr />`;
+  div.innerHTML += `
+    <button class="submit">submit</button>
+    <button class="delete">Delete</button>
+    <hr />
+  `;
   container.appendChild(div);
 
-  div.querySelector('button').onclick = () => {
+  div.querySelector('.delete').onclick = () => {
+    firebase.database().ref(`/lessons/korean/${lessonId}`).remove();
+    window.location.reload();
+  };
+  div.querySelector('.submit').onclick = () => {
     const lessonData = {};
     const inputs = div.querySelectorAll('.inputField');
     inputs.forEach( inp => {
