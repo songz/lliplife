@@ -205,10 +205,15 @@ Array.prototype.random = function() {
     flipCard();
   };
 
-  document.querySelector('#speaker').onclick = () => {
+  document.querySelector('#button__speak').onclick = () => {
     const word = flipped ? currentContent[1] : currentContent[0];
     const voice = word.isEnglish ? "US English Female" : 'Korean Female';
     responsiveVoice.speak(word.root || word.display, voice, {rate: 0.7});
+  };
+
+  document.querySelector('#button__restart').onclick = () => {
+    localStorage.setItem('llip-app', '');
+    window.location.reload();
   };
 
 })();
