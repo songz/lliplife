@@ -44,7 +44,7 @@ Array.prototype.random = function() {
   const selection = rootData.selection || {}; // TODO: default lessonId
   const selectedLesson = (rootData.lessons.korean[selection.lessonId] || {});
 
-  const cards = rootData.cardsContent || Object.keys(langWords);
+  const cards = rootData.cardsContent || Object.keys(langWords).reverse();
 
   setTimeout(() => {
     startCard()
@@ -159,9 +159,11 @@ Array.prototype.random = function() {
       const val = element.dataset.value;
       const words = Object.values(wordMap).filter( w => w.wordId ).map( w => w.wordId )
       words.forEach( (wordId, i) => {
+        const wordTense = langWords[wordId].type;
         if (val === "bad") {
           // Skipping so the same combination doesn't show up again
-          const nextId = skipWordByTense(i, langWords[wordId].type);
+          const offSet = Object.keys(wordMap).filter(key => key.includes(wordTense)).length;
+          const nextId = skipWordByTense(1 + offSet, wordTense);
           if (nextId < 0) {
             cards.push(wordId);
           } else {
@@ -174,7 +176,7 @@ Array.prototype.random = function() {
           let stat = +cardStats[wordId];
           if (stat) {
             stat *= 2;
-            const nextId = skipWordByTense(stat, langWords[wordId].type);
+            const nextId = skipWordByTense(stat, wordTense);
             if(nextId < 0) {
               alert('word is cleared: ' + wordId);
               delete cardStats[wordId];
