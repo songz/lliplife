@@ -83,6 +83,7 @@ Array.prototype.random = function() {
     const langStruct = selectedLesson.languageStructure;
 
     let engDisplay = "";
+    let engDefinition = "";
     let langDisplay = "";
     let engRoot = '';
 
@@ -98,6 +99,7 @@ Array.prototype.random = function() {
       } else {
         engDisplay = engWord.root;
       }
+      engDefinition = engWord.definition || '';
       engRoot = engWord.root;
     } else {
       wordMap = engStruct.split('-').reduce((acc, e, i) => {
@@ -141,6 +143,7 @@ Array.prototype.random = function() {
 
     currentContent = [{
       display: engDisplay,
+      definition: engDefinition,
       isEnglish: true,
       root: engRoot || false
     }, {
