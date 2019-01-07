@@ -1,6 +1,6 @@
-const rootData = JSON.parse(localStorage.getItem('llip-korean'));
-const words = rootData.words;
-const eng = words.english;
+const rootData = JSON.parse(localStorage.getItem('llip-app'))
+const words = rootData.words
+const eng = words.english
 const renderWordView = (eng, kor) => {
   return `
   <div class="wordView">
@@ -8,10 +8,10 @@ const renderWordView = (eng, kor) => {
   <p>${kor.type} - ${eng.definition}</p>
   <hr>
   </div>
-  `;
-};
+  `
+}
 
-const container = document.querySelector('.container');
-container.innerHTML = Object.values(words.korean).reduce( (acc, word) => {
-  return acc + renderWordView(eng[word.link], word);
-}, '');
+const container = document.querySelector('.container')
+container.innerHTML = Object.values(words.korean).reduce((acc, word) => {
+  return acc + renderWordView(eng[word.link], word)
+}, '')

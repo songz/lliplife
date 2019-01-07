@@ -134,7 +134,11 @@ Array.prototype.random = function () {
           const options = tense.split('|')
           langDisplay += mapVal ? `${options[mapVal.customId]} ` : `${options.random()[1]}`
         } else {
-          langDisplay += `${kClient.conjugate(langWords[mapVal.wordId].root, { tense })} `
+          if (tense === 'root') {
+            langDisplay += `${langWords[mapVal.wordId].root} `
+          } else {
+            langDisplay += `${kClient.conjugate(langWords[mapVal.wordId].root, { tense })} `
+          }
         }
       })
     }
