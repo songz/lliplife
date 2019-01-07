@@ -125,21 +125,23 @@ Array.prototype.random = function () {
         return acc
       }, {})
 
+      const getLangDisplay = (mapVal, tense, type) => {
+        if (type === 'custom') {
+          const options = tense.split('|')
+          return mapVal ? `${options[mapVal.customId]} ` : `${options.random()[1]}`
+        }
+        if (tense === 'root') {
+          return `${langWords[mapVal.wordId].root} `
+        }
+
+        return `${kClient.conjugate(langWords[mapVal.wordId].root, { tense })} `
+      }
+
       langStruct.split('-').forEach((e, i) => {
         const regex = /^(\d*)(.*)\((.*)\)/g
         const [_, num, type, tense] = regex.exec(e)
         const key = num + type
-        const mapVal = wordMap[key]
-        if (type === 'custom') {
-          const options = tense.split('|')
-          langDisplay += mapVal ? `${options[mapVal.customId]} ` : `${options.random()[1]}`
-        } else {
-          if (tense === 'root') {
-            langDisplay += `${langWords[mapVal.wordId].root} `
-          } else {
-            langDisplay += `${kClient.conjugate(langWords[mapVal.wordId].root, { tense })} `
-          }
-        }
+        langDisplay += getLangDisplay(wordMap[key], tense, type)
       })
     }
 
